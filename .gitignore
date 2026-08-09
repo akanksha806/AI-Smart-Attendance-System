@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+temp/
+*.log
+
+# Face recognition data
+face_ai/dataset/
+face_recognition/dataset/
+
+# Generated face models
+face_ai/models/
+
+# Temporary files
+temp/
+
+# Face recognition data
+face_ai/dataset/
+face_ai/models/
+
+# Local face-recognition dataset
+face_recognition/dataset/
+
+# Logs
+*.log

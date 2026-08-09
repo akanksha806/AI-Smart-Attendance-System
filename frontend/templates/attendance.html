@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Attendance · AI Smart Attendance{% endblock %}
+{% block page_title %}Attendance{% endblock %}
+{% block page_subtitle %}Monitor and manage attendance records{% endblock %}
+
+{% block content %}
+
+<section class="section">
+  <div class="card">
+    <div class="table-toolbar">
+      <div class="search-box">
+        <i data-lucide="search"></i>
+        <input type="text" id="attendanceSearch" placeholder="Search by student ID..." aria-label="Search attendance">
+      </div>
+      <input type="date" class="input" id="dateFilter" style="width:auto;" aria-label="Filter by date">
+      <select class="select" id="statusFilter" style="width:auto;" aria-label="Filter by status">
+        <option value="">All Statuses</option>
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+        <option value="Late">Late</option>
+      </select>
+      <div class="spacer"></div>
+      <button class="btn btn-secondary" id="exportCsvBtn">
+        <i data-lucide="download"></i> Export CSV
+      </button>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="attendanceBody">
+          <tr><td colspan="4"><div class="skeleton skel-row"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-toolbar" id="paginationBar" style="display:none;">
+      <span class="hint" id="paginationLabel"></span>
+      <div class="spacer"></div>
+      <button class="btn btn-secondary btn-sm" id="prevPageBtn"><i data-lucide="chevron-left"></i> Prev</button>
+      <button class="btn btn-secondary btn-sm" id="nextPageBtn">Next <i data-lucide="chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/attendance.js"></script>
+{% endblock %}

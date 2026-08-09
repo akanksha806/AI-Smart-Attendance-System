@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+opencv-python
+numpy
+pandas
+mysql-connector-python
+python-dotenv
+python-multipart
+jinja2

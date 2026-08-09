@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Settings · AI Smart Attendance{% endblock %}
+{% block page_title %}Settings{% endblock %}
+{% block page_subtitle %}Preferences for this dashboard{% endblock %}
+
+{% block content %}
+
+<section class="section" style="max-width:720px;">
+  <div class="section-head">
+    <h2>General</h2>
+  </div>
+  <div class="card settings-group">
+    <div class="settings-row">
+      <div class="settings-row-text">
+        <h4>Dark Mode</h4>
+        <p>This dashboard is designed dark-first for a focused, low-glare workspace.</p>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" checked disabled>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="settings-row">
+      <div class="settings-row-text">
+        <h4>Notifications<span class="settings-tag">UI only</span></h4>
+        <p>Show toast notifications for actions like enrolling a face or marking attendance.</p>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="notifToggle" checked>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="max-width:720px;">
+  <div class="section-head">
+    <h2>Attendance</h2>
+  </div>
+  <div class="card settings-group">
+    <div class="settings-row">
+      <div class="settings-row-text">
+        <h4>Auto Attendance<span class="settings-tag">UI only</span></h4>
+        <p>When a face is recognized, attendance is already marked automatically by the backend. This toggle is a local display preference only.</p>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" checked disabled>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="max-width:720px;">
+  <div class="section-head">
+    <h2>AI Recognition</h2>
+  </div>
+  <div class="card settings-group">
+    <div class="settings-row">
+      <div class="settings-row-text">
+        <h4>Recognition Tolerance<span class="settings-tag">UI only</span></h4>
+        <p>The backend currently uses a fixed tolerance of 0.5. Adjusting this slider does not change server behavior yet.</p>
+      </div>
+      <div class="range-row">
+        <input type="range" id="toleranceRange" min="0.3" max="0.7" step="0.05" value="0.5" disabled>
+        <span class="range-val" id="toleranceVal">0.50</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="max-width:720px;">
+  <div class="section-head">
+    <h2>System</h2>
+  </div>
+  <div class="card settings-group">
+    <div class="settings-row">
+      <div class="settings-row-text">
+        <h4>AI Engine Status</h4>
+        <p>Live status of the face recognition backend.</p>
+      </div>
+      <div class="badge badge-present">Online</div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-row-text">
+        <h4>API Base URL</h4>
+        <p>All requests are sent to the same origin serving this dashboard.</p>
+      </div>
+      <span class="mono" style="font-size:12.5px; color:var(--text-secondary);">/ (same origin)</span>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const range = document.getElementById("toleranceRange");
+    const val = document.getElementById("toleranceVal");
+    if (range && val) {
+      range.addEventListener("input", () => { val.textContent = parseFloat(range.value).toFixed(2); });
+    }
+  });
+</script>
+{% endblock %}

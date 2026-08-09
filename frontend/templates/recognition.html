@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Face Recognition · AI Smart Attendance{% endblock %}
+{% block page_title %}Face Recognition{% endblock %}
+{% block page_subtitle %}Identify students and automatically mark attendance{% endblock %}
+
+{% block content %}
+
+<section class="section grid-2">
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <h3>Recognition Workspace</h3>
+        <p>Upload or capture a face to scan against enrolled students</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="scanner" id="scannerZone">
+        <div class="scanner-empty" id="scannerEmptyState">
+          <div class="scan-icon-wrap"><i data-lucide="scan-face"></i></div>
+          <h4>Upload or capture an image to mark attendance</h4>
+          <p>Drag & drop a photo here, click to browse, or use your camera</p>
+        </div>
+
+        <div class="scanner-preview" id="scannerPreviewWrap" style="display:none;">
+          <img id="scannerPreviewImg" alt="Selected face preview">
+          <div class="scan-frame">
+            <span class="scan-corner tl"></span>
+            <span class="scan-corner tr"></span>
+            <span class="scan-corner bl"></span>
+            <span class="scan-corner br"></span>
+          </div>
+          <div class="scan-line"></div>
+          <button type="button" class="scanner-remove" id="scannerRemoveBtn" aria-label="Remove image"><i data-lucide="x"></i></button>
+        </div>
+      </div>
+      <input type="file" id="scannerFileInput" accept="image/jpeg,image/png,image/jpg" style="display:none;">
+
+      <div class="recognition-actions">
+        <button class="btn btn-secondary" id="uploadImageBtn">
+          <i data-lucide="upload"></i> Upload Image
+        </button>
+        <button class="btn btn-secondary" id="cameraBtn">
+          <i data-lucide="camera"></i> Use Camera
+        </button>
+        <div style="flex:1;"></div>
+        <button class="btn btn-primary" id="recognizeBtn" disabled>
+          <i data-lucide="scan-face"></i> <span id="recognizeLabel">Recognize Face</span>
+        </button>
+      </div>
+
+      <!-- Camera capture panel -->
+      <div id="cameraPanel" style="display:none; margin-top:16px;">
+        <video id="cameraVideo" autoplay playsinline style="width:100%; border-radius:var(--radius-md); border:1px solid var(--border); background:#000;"></video>
+        <canvas id="cameraCanvas" style="display:none;"></canvas>
+        <div class="recognition-actions" style="margin-top:12px;">
+          <button class="btn btn-secondary" id="cancelCameraBtn"><i data-lucide="x"></i> Cancel</button>
+          <div style="flex:1;"></div>
+          <button class="btn btn-primary" id="captureBtn"><i data-lucide="aperture"></i> Capture</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="result-panel" id="resultPanel">
+        <div class="result-icon" id="resultIcon"><i data-lucide="check"></i></div>
+        <div class="result-text">
+          <h4 id="resultTitle">Face Recognized</h4>
+          <p id="resultSubtitle">Attendance marked successfully.</p>
+          <div class="result-meta" id="resultMeta"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <h3>How It Works</h3>
+        <p>The recognition pipeline, end to end</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="how-it-works">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <p>Upload or capture an image of the student's face.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <p>The AI engine detects the face within the image.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <p>A face encoding is generated and compared against enrolled students.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <p>The closest matching student is identified.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">5</div>
+          <p>Attendance is automatically recorded for that student.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/recognition.js"></script>
+{% endblock %}

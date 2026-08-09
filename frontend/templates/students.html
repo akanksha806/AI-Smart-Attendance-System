@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Students · AI Smart Attendance{% endblock %}
+{% block page_title %}Students{% endblock %}
+{% block page_subtitle %}Manage registered students and face profiles{% endblock %}
+
+{% block content %}
+
+<section class="section">
+  <div class="card">
+    <div class="table-toolbar">
+      <div class="search-box">
+        <i data-lucide="search"></i>
+        <input type="text" id="studentSearch" placeholder="Search students..." aria-label="Search students">
+      </div>
+      <div class="spacer"></div>
+      <button class="btn btn-primary" id="openAddStudent">
+        <i data-lucide="user-plus"></i> Add Student
+      </button>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="studentsBody">
+          <tr><td colspan="5"><div class="skeleton skel-row"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ADD / EDIT STUDENT MODAL -->
+<div class="modal-overlay" id="studentModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="studentModalTitle">Add Student</h3>
+      <button class="icon-btn" id="closeStudentModal" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="studentForm">
+        <input type="hidden" id="studentFormId" value="">
+        <div class="field">
+          <label for="studentName">Name <span class="req">*</span></label>
+          <input class="input" type="text" id="studentName" placeholder="e.g. Akanksha Gupta" required>
+        </div>
+        <div class="field">
+          <label for="studentEmail">Email <span class="req">*</span></label>
+          <input class="input" type="email" id="studentEmail" placeholder="student@example.com" required>
+        </div>
+        <div class="field">
+          <label for="studentCourse">Course <span class="req">*</span></label>
+          <input class="input" type="text" id="studentCourse" placeholder="e.g. BCA" required>
+        </div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="cancelStudentModal">Cancel</button>
+      <button class="btn btn-primary" id="submitStudentForm">
+        <span id="studentSubmitLabel">Add Student</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW STUDENT MODAL -->
+<div class="modal-overlay" id="viewModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Student Details</h3>
+      <button class="icon-btn" id="closeViewModal" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body" id="viewModalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="closeViewModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ENROLL FACE MODAL -->
+<div class="modal-overlay" id="enrollModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Enroll Face</h3>
+      <button class="icon-btn" id="closeEnrollModal" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="enrollStudentId">Student ID</label>
+        <input class="input mono" type="text" id="enrollStudentId" readonly>
+      </div>
+      <div class="field">
+        <label>Face Image <span class="req">*</span></label>
+        <div class="scanner" id="enrollDropzone" style="min-height:200px;">
+          <div class="scanner-empty" id="enrollEmptyState">
+            <div class="scan-icon-wrap"><i data-lucide="image-plus"></i></div>
+            <h4>Upload a clear face photo</h4>
+            <p>JPG or PNG · click to browse or drag and drop</p>
+          </div>
+          <div class="scanner-preview" id="enrollPreviewWrap" style="display:none;">
+            <img id="enrollPreviewImg" alt="Selected face image preview">
+            <button type="button" class="scanner-remove" id="enrollRemoveImg" aria-label="Remove image"><i data-lucide="x"></i></button>
+          </div>
+        </div>
+        <input type="file" id="enrollFileInput" accept=".jpg,.jpeg,.png" style="display:none;">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="cancelEnrollModal">Cancel</button>
+      <button class="btn btn-primary" id="submitEnrollForm" disabled>
+        <span id="enrollSubmitLabel">Enroll Face</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-overlay" id="deleteModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Delete Student</h3>
+      <button class="icon-btn" id="closeDeleteModal" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13.5px; color:var(--text-secondary); line-height:1.5;">
+        This will permanently remove <strong id="deleteStudentName" style="color:var(--text-primary);"></strong>
+        (<span class="mono" id="deleteStudentId"></span>) from the system. This action cannot be undone.
+      </p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="cancelDeleteModal">Cancel</button>
+      <button class="btn btn-danger" id="confirmDeleteBtn">
+        <i data-lucide="trash-2"></i> Delete Student
+      </button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/students.js"></script>
+{% endblock %}

@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard · AI Smart Attendance{% endblock %}
+
+{% block page_title %}
+<span id="greetingText">Good Morning</span> 👋
+{% endblock %}
+
+{% block page_subtitle %}
+<span id="todayDate">AI Attendance Dashboard</span>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ==================== STATS ==================== -->
+
+<div class="stats-grid">
+
+    <!-- Present -->
+    <div class="card stat-card">
+
+        <div class="stat-top">
+            <span class="stat-label">Present Today</span>
+
+            <div class="stat-icon green">
+                <i data-lucide="check-circle"></i>
+            </div>
+        </div>
+
+        <div class="stat-value" id="statPresent">–</div>
+
+        <div class="stat-delta" id="statPresentDelta">
+            No attendance yet
+        </div>
+
+    </div>
+
+
+    <!-- Absent -->
+    <div class="card stat-card">
+
+        <div class="stat-top">
+            <span class="stat-label">Absent Today</span>
+
+            <div class="stat-icon red">
+                <i data-lucide="x-circle"></i>
+            </div>
+        </div>
+
+        <div class="stat-value" id="statAbsent">–</div>
+
+        <div class="stat-delta">
+            Not yet marked present
+        </div>
+
+    </div>
+
+
+    <!-- Late -->
+    <div class="card stat-card">
+
+        <div class="stat-top">
+            <span class="stat-label">Late Today</span>
+
+            <div class="stat-icon amber">
+                <i data-lucide="clock-4"></i>
+            </div>
+        </div>
+
+        <div class="stat-value" id="statLate">–</div>
+
+        <div class="stat-delta">
+            Unique students marked late
+        </div>
+
+    </div>
+
+
+    <!-- Total -->
+    <div class="card stat-card">
+
+        <div class="stat-top">
+            <span class="stat-label">Total Students</span>
+
+            <div class="stat-icon blue">
+                <i data-lucide="users"></i>
+            </div>
+        </div>
+
+        <div class="stat-value" id="statTotal">–</div>
+
+        <div class="stat-delta">
+            Registered in system
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================== MAIN DASHBOARD ==================== -->
+
+<div class="dashboard-main-grid">
+
+
+    <!-- LIVE FACE RECOGNITION -->
+
+    <div class="card dashboard-feature-card">
+
+        <div class="card-header">
+
+            <div>
+                <h2>Live Face Recognition</h2>
+
+                <p>
+                    The core AI feature — identify a student and
+                    mark attendance automatically
+                </p>
+            </div>
+
+            <div class="status-pill online">
+                <span class="status-dot"></span>
+                Engine Online
+            </div>
+
+        </div>
+
+
+        <div class="feature-body">
+
+            <div class="feature-icon">
+                <i data-lucide="scan-face"></i>
+            </div>
+
+
+            <div class="feature-content">
+
+                <h3>
+                    Upload or capture an image to mark attendance
+                </h3>
+
+                <p>
+                    Open the dedicated Face Recognition workspace
+                    to scan a student's face — recognition and
+                    attendance marking happen automatically through
+                    your MySQL-backed AI engine.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/recognition-page"
+                class="btn btn-primary"
+            >
+                <i data-lucide="scan-face"></i>
+                Open Face Recognition
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ATTENDANCE CHART -->
+
+    <div class="card dashboard-chart-card">
+
+        <div class="card-header">
+
+            <div>
+                <h2>Today's Attendance</h2>
+
+                <p>
+                    Live breakdown by status
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="chart-container">
+
+            <canvas id="attendanceChart"></canvas>
+
+        </div>
+
+
+        <div class="chart-legend">
+
+            <div class="legend-item">
+                <span class="legend-dot present"></span>
+                <span>Present</span>
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot absent"></span>
+                <span>Absent</span>
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot late"></span>
+                <span>Late</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================== RECENT ATTENDANCE ==================== -->
+
+<div class="card recent-attendance-card">
+
+    <div class="card-header">
+
+        <div>
+            <h2>Recent Attendance</h2>
+
+            <p>
+                Latest attendance activity
+            </p>
+        </div>
+
+
+        <a
+            href="/attendance-page"
+            class="btn btn-secondary"
+        >
+            View All
+            <i data-lucide="arrow-right"></i>
+        </a>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+        <table class="data-table">
+
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="recentAttendanceBody">
+
+                <tr>
+                    <td colspan="4">
+
+                        <div class="empty-state">
+
+                            <i data-lucide="loader"></i>
+
+                            <span class="empty-title">
+                                Loading attendance...
+                            </span>
+
+                        </div>
+
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Dashboard JavaScript -->
+<script src="{{ url_for('static', path='js/dashboard.js') }}"></script>
+
+{% endblock %}

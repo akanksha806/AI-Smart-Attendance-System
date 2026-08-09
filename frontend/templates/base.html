@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}AI Smart Attendance{% endblock %}</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<link rel="stylesheet" href="/static/css/style.css">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Mobile overlay -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+          <rect x="21" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+          <rect x="3" y="21" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+          <rect x="21" y="21" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="16" cy="16" r="3.2" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">AI Smart Attendance</span>
+        <span class="brand-sub">Face Recognition System</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="/" class="nav-item" data-nav="dashboard">
+        <i data-lucide="layout-dashboard"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="/students-page" class="nav-item" data-nav="students">
+        <i data-lucide="users"></i>
+        <span>Students</span>
+      </a>
+      <a href="/attendance-page" class="nav-item" data-nav="attendance">
+        <i data-lucide="calendar-check"></i>
+        <span>Attendance</span>
+      </a>
+      <a href="/recognition-page" class="nav-item" data-nav="recognition">
+        <i data-lucide="scan-face"></i>
+        <span>Face Recognition</span>
+      </a>
+      <a href="/settings-page" class="nav-item" data-nav="settings">
+        <i data-lucide="settings"></i>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <div class="status-copy">
+          <span class="status-title">AI Engine Online</span>
+          <span class="status-sub">Recognition service active</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN COLUMN -->
+  <div class="main-col">
+
+    <header class="topbar">
+      <button class="icon-btn drawer-toggle" id="drawerToggle" aria-label="Toggle navigation menu">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <div class="topbar-title">
+        <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+        <p>{% block page_subtitle %}{% endblock %}</p>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="topbar-clock" id="topbarClock">
+          <i data-lucide="clock"></i>
+          <span id="clockText">--:--</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div>
+</div>
+
+<!-- TOAST HOST -->
+<div class="toast-host" id="toastHost"></div>
+
+<script src="/static/js/app.js"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

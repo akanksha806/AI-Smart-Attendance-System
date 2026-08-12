@@ -80,3 +80,5 @@ Face Recognition
                              
   ▼
 MySQL Database
+
+Note: The live demo is hosted on an AWS EC2 instance and may be temporarily unavailable when the server is stopped.

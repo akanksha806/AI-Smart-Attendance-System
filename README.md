@@ -5,7 +5,9 @@ to identify enrolled users and automatically record attendance.
 
 ## 🚀 Live Demo
 
-(https://3.27.111.51.nip.io/)
+🌐 **Live Application:** [AI Smart Attendance System](https://3.27.111.51.nip.io/)
+
+🤖 **Face Recognition:** [Try Face Recognition](https://3.27.111.51.nip.io/recognition-page)
 
 ## 📌 About The Project
 
